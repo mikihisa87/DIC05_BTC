@@ -1,0 +1,17 @@
+Feature	Definition	日本語訳	参照先
+Average Confirmation Time	Ave. time to accept transaction in block	ブロックにおけるトランザクション平均時間	https://blockchain.info/charts/avg-confirmation-time
+Block Size	Average block size in MB	Mega Byteでの平均ブロックサイズ	https://blockchain.info/ja/charts/avg-block-size
+Cost per transaction percent	Miners revenue divided by the number of transactions	トランザクション量で割ったマイナー採掘量	https://blockchain.info/ja/charts/cost-per-transaction
+Difficulty	How difficult it is to find a new block	採掘難易度	https://blockchain.info/ja/charts/difficulty
+Estimated Transaction Volume	Total output volume without change from value	総トランザクションボリューム	https://blockchain.info/ja/charts/estimated-transaction-volume
+Hash Rate	Bitcoin network giga hashes per second	ハッシュレート	https://blockchain.info/ja/charts/hash-rate
+Market Capitalization	Number of Bitcoins in circulation *the market price	時価総額	https://blockchain.info/ja/charts/market-cap
+Miners Revenue	(number of BTC mined/day * market price ) + transaction fees	採掘収益量	https://blockchain.info/ja/charts/miners-revenue
+Number of Orphaned Blocks	Number of blocks mined / day not off blockchain	孤立ブロック数	https://blockchain.info/ja/charts/n-orphaned-blocks
+Number of TXN per Blocks	Average number of unique Bitcoin transactions per day	ブロック毎のトランザクション量	https://blockchain.info/ja/charts/n-transactions-per-block
+Number of TXN	Total number of unique Bitcoin transactions per day	日毎のトランザクション量	https://blockchain.info/ja/charts/n-transactions-per-block
+Number of unique addresses	Number of unique Bitcoin addresses used per day	ユニークアドレス	https://blockchain.info/ja/charts/n-unique-addresses
+Total Bitcoins	Historical total Number of Bitcoins mined	総採掘量	https://blockchain.info/ja/charts/total-bitcoins
+TXN Fees Total	BTC value of transactin fees miners earn/day	日毎のトランザクション手数料	https://blockchain.info/ja/charts/transaction-fees
+Trade Volume	USD trade valume from the top exchanges	ドル取引量	https://blockchain.info/ja/charts/trade-volume
+Transaction to trade ratio	Relationship of BTC transaction volume and USD volume	予想USD取引量	https://blockchain.info/ja/charts/estimated-transaction-volume-usd
