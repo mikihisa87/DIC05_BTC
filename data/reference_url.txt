@@ -1,4 +1,4 @@
-Feature	Definition	日本語訳	参照先
+Feature	Definition	日本語訳	参照先 
 Average Confirmation Time	Ave. time to accept transaction in block	ブロックにおけるトランザクション平均時間	https://blockchain.info/charts/avg-confirmation-time
 Block Size	Average block size in MB	Mega Byteでの平均ブロックサイズ	https://blockchain.info/ja/charts/avg-block-size
 Cost per transaction percent	Miners revenue divided by the number of transactions	トランザクション量で割ったマイナー採掘量	https://blockchain.info/ja/charts/cost-per-transaction
