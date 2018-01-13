@@ -11,10 +11,11 @@ from sklearn import ensemble
 from sklearn.linear_model import SGDClassifier
 from sklearn.svm import SVC
 
-os.chdir("./data")
+#os.chdir("./data")
 dataset = pd.read_csv("Dataset.csv")
-dataset.drop(columns={"Unnamed: 0", "date"}, inplace=True)
+dataset.drop('Unnamed: 0', axis=1, inplace=True)
 #dataset.set_index("date")
+
 
 #add label
 price = dataset["price"]
@@ -31,15 +32,32 @@ for i in range(len(dataset)):
 
 dataset["label"] = labels
 
+#パラメータ初期値
+dt_param1 = 'gini'
+dt_param2 = 1
+rf_param1 = 'gini'
+rf_param2 = 1
+rf_param3 = 12
+sgdc_param1 = 0.0001
+sgdc_param2 = 'log'
+sgdc_param3 = 43
+sgdc_param4 = 'elasticnet'
+sgdc_param5 = False
+svm_param1 = 1
+svm_param2 = 2
+svm_param3 = 0.001
+svm_param4 = 'poly'
+
 #Model定義  *最適化済みパラメータ追記
-clf_dt = tree.DecisionTreeClassifier(max_depth=1, criterion='gini')
-clf_rf = ensemble.RandomForestClassifier(criterion='gini', max_depth=1, n_estimators=12)
-clf_sgdc = SGDClassifier(alpha=0.0001,loss='log', max_iter=43, penalty='elasticnet',shuffle=False)
-clf_svm = SVC(C=1, degree=2, gamma=0.001, kernel='poly')
+clf_dt = tree.DecisionTreeClassifier(criterion=dt_param1, max_depth=dt_param2)
+clf_rf = ensemble.RandomForestClassifier(criterion=rf_param1, max_depth=rf_param2, n_estimators=rf_param2)
+clf_sgdc = SGDClassifier(alpha=sgdc_param1, loss=sgdc_param2, max_iter=sgdc_param3, penalty=sgdc_param4, shuffle=sgdc_param5)
+clf_svm = SVC(C=svm_param1, degree=svm_param2, gamma=svm_param3, kernel=svm_param4)
 
 #正規化なし
-X = dataset.drop(columns=["label"])
+X = dataset.drop("label", axis=1)
 y = dataset["label"]
+X = X.set_index('date')
 
 #正規化あり
 X_array = np.array(X)
@@ -65,10 +83,9 @@ def dtbestparam(X, y):
                                 cv=10, # 10-Fold CVで汎化性能を調べる
                                 )
     grid_search.fit(features, targets)
-    return grid_search.best_score_, grid_search.best_params_
-#結果
-#best_score_=0.539726027397
-#best_params_={'criterion': 'gini', 'max_depth': 1}
+    print(grid_search.best_score_, grid_search.best_params_)
+    return grid_search.best_params_
+
 
 #パラメータ最適化/ensemble.RandomForestClassifier
 def rfbestparam(X, y):
@@ -85,10 +102,8 @@ def rfbestparam(X, y):
                                 cv=10, # 10-Fold CVで汎化性能を調べる
                                 )
     grid_search.fit(features, targets)
-    return grid_search.best_score_, grid_search.best_params_
-#結果
-#best_score_=0.627397260274
-#best_params_={'criterion': 'gini', 'max_depth': 1, 'n_estimators': 12}
+    print(grid_search.best_score_, grid_search.best_params_)
+    return grid_search.best_params_
 
 #パラメータ最適化/SGDClassifier
 def sgdcbestparam(X, y):
@@ -108,10 +123,9 @@ def sgdcbestparam(X, y):
                                 cv=10, # 10-Fold CVで汎化性能を調べる
                                 )
     grid_search.fit(features, targets)
-    return grid_search.best_score_, grid_search.best_params_
-#結果
-#best_score_=0.652054794521
-#best_params_={'alpha': 0.0001, 'loss': 'log', 'max_iter': 43, 'penalty': 'elasticnet', 'shuffle': False}
+    print(grid_search.best_score_, grid_search.best_params_)
+    return grid_search.best_params_
+
 
 #パラメータ最適化/SVM
 def svmbestparam(X, y):
@@ -129,10 +143,8 @@ def svmbestparam(X, y):
                                 cv=10, # 10-Fold CVで汎化性能を調べる
                                 )
     grid_search.fit(features, targets)
-    return grid_search.best_score_, grid_search.best_params_
-#結果
-#best_score_=0.624657534247
-#best_params_={'C': 1, 'degree': 2, 'gamma': 0.001, 'kernel': 'poly'}
+    print(grid_search.best_score_, grid_search.best_params_)
+    return grid_search.best_params_
 
 #精度確認
 def accuracy(clf, X, y, model):
@@ -148,8 +160,44 @@ def accuracy(clf, X, y, model):
     score_all = np.array(score_all)
     mscore = (score_all.mean())*100
     print("{} Mean_Score :".format(model), round(mscore, 2), "%")
-    return
+    return clf
 
+#Xとx_norm(正規化されたX)を各モデルに入れ、ベストパラメータを表示
+dtbestparam(X, y)
+dtbestparam(X_norm, y)
+#取得したベストパラメータに代入、モデルのパラメータを更新(X_normの学習値を使用)
+dt_bestparam = dtbestparam(X_norm, y)
+dt_param1 = dt_bestparam['criterion']
+dt_param2 = dt_bestparam['max_depth']
+Xとx_norm(正規化されたX)を各モデルに入れ、ベストパラメータを表示
+rfbestparam(X, y)
+rfbestparam(X_norm, y)
+#取得したベストパラメータに代入、モデルのパラメータを更新(X_normの学習値を使用)
+rf_bestparam = rfbestparam(X_norm, y)
+rf_param1 = rf_bestparam['criterion']
+rf_param2 = rf_bestparam['max_depth']
+rf_param3 = rf_bestparam['n_estimators']
+#Xとx_norm(正規化されたX)を各モデルに入れ、ベストパラメータを表示
+sgdcbestparam(X, y)
+sgdcbestparam(X_norm, y)
+#取得したベストパラメータに代入、モデルのパラメータを更新(X_normの学習値を使用)
+sgdc_bestparam = sgdcbestparam(X_norm, y)
+sgdc_param1 = sgdc_bestparam['alpha']
+sgdc_param2 = sgdc_bestparam['loss']
+sgdc_param3 = sgdc_bestparam['max_iter']
+sgdc_param4 = sgdc_bestparam['penalty']
+sgdc_param5 = sgdc_bestparam['shuffle']
+#Xとx_norm(正規化されたX)を各モデルに入れ、ベストパラメータを表示
+svmbestparam(X, y)
+svmbestparam(X_norm, y)
+#取得したベストパラメータに代入、モデルのパラメータを更新(X_normの学習値を使用)
+svm_bestparam = svmcbestparam(X_norm, y)
+svm_param1 = svm_bestparam['C']
+svm_param2 = svm_bestparam['degree']
+svm_param3 = svm_bestparam['gamma']
+svm_param4 = svm_bestparam['kernel']
+
+#精度表示
 accuracy(clf_dt, X, y, "DecisionTree")
 accuracy(clf_dt, X_norm, y, "DecisionTree with Norm")
 accuracy(clf_rf, X, y, "RamdomForest")
