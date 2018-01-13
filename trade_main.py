@@ -169,7 +169,7 @@ dtbestparam(X_norm, y)
 dt_bestparam = dtbestparam(X_norm, y)
 dt_param1 = dt_bestparam['criterion']
 dt_param2 = dt_bestparam['max_depth']
-Xとx_norm(正規化されたX)を各モデルに入れ、ベストパラメータを表示
+#Xとx_norm(正規化されたX)を各モデルに入れ、ベストパラメータを表示
 rfbestparam(X, y)
 rfbestparam(X_norm, y)
 #取得したベストパラメータに代入、モデルのパラメータを更新(X_normの学習値を使用)
