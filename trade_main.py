@@ -48,7 +48,7 @@ svm_param2 = 2
 svm_param3 = 0.001
 svm_param4 = 'poly'
 
-#Model定義  *最適化済みパラメータ追記
+#Model定義
 clf_dt = tree.DecisionTreeClassifier(criterion=dt_param1, max_depth=dt_param2)
 clf_rf = ensemble.RandomForestClassifier(criterion=rf_param1, max_depth=rf_param2, n_estimators=rf_param2)
 clf_sgdc = SGDClassifier(alpha=sgdc_param1, loss=sgdc_param2, max_iter=sgdc_param3, penalty=sgdc_param4, shuffle=sgdc_param5)
@@ -196,6 +196,12 @@ svm_param1 = svm_bestparam['C']
 svm_param2 = svm_bestparam['degree']
 svm_param3 = svm_bestparam['gamma']
 svm_param4 = svm_bestparam['kernel']
+
+#Model再定義  
+clf_dt = tree.DecisionTreeClassifier(criterion=dt_param1, max_depth=dt_param2)
+clf_rf = ensemble.RandomForestClassifier(criterion=rf_param1, max_depth=rf_param2, n_estimators=rf_param2)
+clf_sgdc = SGDClassifier(alpha=sgdc_param1, loss=sgdc_param2, max_iter=sgdc_param3, penalty=sgdc_param4, shuffle=sgdc_param5)
+clf_svm = SVC(C=svm_param1, degree=svm_param2, gamma=svm_param3, kernel=svm_param4)
 
 #精度表示
 accuracy(clf_dt, X, y, "DecisionTree")
